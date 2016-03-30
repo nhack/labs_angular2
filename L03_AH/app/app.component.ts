@@ -5,7 +5,15 @@ import {Component} from 'angular2/core';
     template: ''
 })
 export class AppComponent {
+
+    pizza;
+
     constructor() {
-        console.log('Hello from Angular 2!!!!');
+        this.pizza = {
+            name: '4 STAGIONI',
+            price: 27.5,
+            weight: 550,
+            ingredients: 'sos rosii, mozzarella, ciuperci, salam, sunca presata, oregano, anghinare'
+        }
     }
 }
