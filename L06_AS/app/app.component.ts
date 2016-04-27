@@ -11,20 +11,13 @@ import {PizzaService} from './pizza.service';
   styleUrls: ['app/app.component.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [TabsComponent],
+  providers: [PizzaService]
 })
 export class AppComponent {
 
   private pizzas: Pizza[];
-  private pizzaService: PizzaService;
 
-  constructor() {
-    this.pizzaService = new PizzaService();
+  constructor(private pizzaService: PizzaService) {
     this.pizzas = this.pizzaService.getPizzas();
   }
 }
-
-
-//TODO:
-//1. create a pizza service loads from file
-//2. create a pizza service that loads from http
-//3. a need for an interface and callback -> because of async
