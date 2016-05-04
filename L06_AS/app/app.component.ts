@@ -1,9 +1,8 @@
-import {Component} from 'angular2/core';
-import {ViewEncapsulation} from 'angular2/core';
+import {Component, ViewEncapsulation} from 'angular2/core';
 
 import {TabsComponent} from './tabs.component';
 import {Pizza} from './pizza';
-import {PizzaService} from './pizza.service';
+import {PizzaFileService} from './pizzaFile.service';
 
 @Component({
   selector: 'my-app',
@@ -11,13 +10,13 @@ import {PizzaService} from './pizza.service';
   styleUrls: ['app/app.component.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [TabsComponent],
-  providers: [PizzaService]
+  providers: [PizzaFileService]
 })
 export class AppComponent {
 
   private pizzas: Pizza[];
 
-  constructor(private pizzaService: PizzaService) {
-    this.pizzas = this.pizzaService.getPizzas();
+  constructor(private pizzaService: PizzaFileService) {
+    this.pizzas = pizzaService.getPizzas();
   }
 }
