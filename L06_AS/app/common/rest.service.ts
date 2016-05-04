@@ -1,25 +1,22 @@
-import {Injectable} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import 'rxjs/Rx';
 
-import {Pizza} from './pizza';
-import {PIZZAS} from './data';
+export abstract class RestService {
 
-@Injectable()
-export class PizzaRestService {
+  constructor() { }
 
-  private url: string = "http://pizza-store.herokuapp.com/api/pizzas";
-
-  constructor(private http: Http) { }
-
-  getPizzas(): Promise<Pizza[]> {
+  getData<T>(): Promise<T[]> {
     return this.http.get(this.url)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
+  protected abstract get http(): Http;
+
+  protected abstract get url(): string;
+
+  protected extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
     }
@@ -27,7 +24,7 @@ export class PizzaRestService {
     return body || {};
   }
 
-  private handleError(error: any) {
+  protected handleError(error: any) {
     // In a real world app, we might send the error to remote logging infrastructure
     let errMsg = error.message || 'Server error';
     console.error(errMsg); // log to console instead
